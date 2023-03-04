@@ -43,9 +43,11 @@ export const MainPage = () => {
                 </Form>
                 <Box sx={{ width: 300 }}>
                     <FormControl fullWidth>
-                        <InputLabel id="demo-simple-select-label" sx={{ fontSize: 17, left: '40px', top: '12px' }}>Filter by region</InputLabel>
+                        <InputLabel id="select-label" sx={{ fontSize: 17, left: '40px', top: '12px' }}>Filter by region</InputLabel>
                         <Select
+                            onChange={(e) => navigate(`/regions/${e.target.value}`)}
                             variant='standard'
+                            defaultValue=''
                             sx={{
                                 boxShadow: '0 0 10px 1px hsl(209deg 23% 22% / 14%)',
                                 '.MuiOutlinedInput-notchedOutline': { border: 0 },
@@ -53,7 +55,7 @@ export const MainPage = () => {
                                 height: '3rem',
                                 borderRadius: '5px'
                             }}
-                            labelId="demo-simple-select-label"
+                            labelId="select-label"
                             disableUnderline={true}
                             inputProps={{
                                 sx: {
@@ -61,11 +63,11 @@ export const MainPage = () => {
                                 },
                             }}
                         >
-                            <MenuItem value='ad'>Africa</MenuItem>
-                            <MenuItem value='aas'>America</MenuItem>
-                            <MenuItem value='sa'>Asia</MenuItem>
-                            <MenuItem value='as'>Europe</MenuItem>
-                            <MenuItem value='sa'>Oceania</MenuItem>
+                            <MenuItem value='Africa'>Africa</MenuItem>
+                            <MenuItem value='America'>America</MenuItem>
+                            <MenuItem value='Asia'>Asia</MenuItem>
+                            <MenuItem value='Europe'>Europe</MenuItem>
+                            <MenuItem value='Oceania'>Oceania</MenuItem>
                         </Select>
                     </FormControl>
                 </Box>

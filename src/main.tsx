@@ -21,6 +21,7 @@ const router = createBrowserRouter([
         element: <MainPage/>,
         loader: async ({request}) => {
           const url = new URL(request.url);
+          console.log(url)
           const q = url.searchParams.get("q");
           if (q) return fetch(`https://restcountries.com/v3.1/name/${q}`)
           return fetch('https://restcountries.com/v3.1/all')
@@ -32,6 +33,17 @@ const router = createBrowserRouter([
         element: <Country/>,
         loader: async ({params}) => {
           return fetch(`https://restcountries.com/v3.1/name/${params.country}`)
+        }
+      },
+      {
+        path: '/regions/:region',
+        element: <MainPage/>,
+        loader: async ({params, request}) => {
+          const url = new URL(request.url);
+          console.log(url)
+          const q = url.searchParams.get("q");
+          if (q) return fetch(`https://restcountries.com/v3.1/name/${q}`)
+          return fetch(`https://restcountries.com/v3.1/region/${params.region}`)
         }
       }
     ]

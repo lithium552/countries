@@ -21,71 +21,77 @@ const Country = () => {
     console.log(data[0], borderCountries)
     const navigate = useNavigate()
   return (
-    <Container maxWidth={false}>
+    <Container maxWidth={'xl'}>
     <Container maxWidth={'xl'} sx={{ marginTop: '2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'end' }}>
     <Button onClick={() => navigate(-1)} variant="contained" sx={{backgroundColor: 'background.default', color: 'primary.main',
      '&:hover': {backgroundColor: '#fff'}, boxShadow: '0 0 10px 1px hsl(209deg 23% 22% / 24%)'}}><ArrowBackRoundedIcon sx={{marginRight: '.5rem', fontSize: '1rem'}}/>Back</Button>
     </Container>
-    <Card sx={{display: 'flex', alignItems: 'center'}}>
+    <Card sx={{display: 'flex', alignItems: 'center', gap: '4rem', mt: '2rem', backgroundColor: '#fff', boxShadow: 'none'}}>
         <CardMedia
-            sx={{width: '50%', p: '1rem'}}
+            sx={{width: '50%', p: '1rem', flex: '1'}}
             component="img"
             height="500"
             image={data[0].flags.svg}
             alt="green iguana"
         />
-        <Box>
+        <Box sx={{flex: '1.5'}}>
         <CardContent>
             <Typography variant="h4" fontWeight='fontWeightBold' color="text.primary">
                 {data[0].name.official}
             </Typography>
-            <Box display='flex' gap={1}>
+            <Box display='flex' gap='3rem' m='2rem 0 4rem'>
+            <Box>
+            <Box display='flex' gap={1} mb='.5rem'>
                 <Typography fontWeight='fontWeightBold'>Native name:</Typography>
                 <Typography>
                 {Object.values(Object.values(data[0].name.nativeName)[0])[0]}
                 </Typography>
             </Box>
-            <Box display='flex' gap={1}>
+            <Box display='flex' gap={1} mb='.5rem'>
                 <Typography fontWeight='fontWeightBold'>Population:</Typography>
                 <Typography>
                 {data[0].population.toLocaleString("en-US")}
                 </Typography>
             </Box>
-            <Box display='flex' gap={1}>
+            <Box display='flex' gap={1} mb='.5rem'>
                 <Typography fontWeight='fontWeightBold'>Region:</Typography>
                 <Typography>
                 {data[0].region}
                 </Typography>
             </Box>
-            <Box display='flex' gap={1}>
+            <Box display='flex' gap={1} mb='.5rem'>
                 <Typography fontWeight='fontWeightBold'>Sub Region:</Typography>
                 <Typography>
                 {data[0].subregion}
                 </Typography>
             </Box>
-            <Box display='flex' gap={1}>
+            <Box display='flex' gap={1} mb='.5rem'>
                 <Typography fontWeight='fontWeightBold'>Capital:</Typography>
                 <Typography>
                 {data[0].capital}
                 </Typography>
             </Box>
-            <Box display='flex' gap={1}>
+            </Box>
+            <Box>
+            <Box display='flex' gap={1} mb='.5rem'>
                 <Typography fontWeight='fontWeightBold'>Top level domain:</Typography>
                 <Typography>
                 {data[0].tld}
                 </Typography>
             </Box>
-            <Box display='flex' gap={1}>
+            <Box display='flex' gap={1} mb='.5rem'>
                 <Typography fontWeight='fontWeightBold'>Currencies:</Typography>
                 <Typography>
                 {Object.values(Object.values(data[0].currencies)[0])[0]}
                 </Typography>
             </Box>
-            <Box display='flex' gap={1}>
+            <Box display='flex' gap={1} mb='.5rem'>
                 <Typography fontWeight='fontWeightBold'>Languages:</Typography>
                 <Typography>
                 {Object.values(Object.values(data[0].languages)).join(', ')}
                 </Typography>
+            </Box>
+            </Box>
             </Box>
         <Box sx={{display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap'}}>
         <Typography fontWeight='fontWeightBold'>Border Countries:</Typography>
