@@ -2,6 +2,7 @@ import { Container, InputAdornment, TextField, InputLabel, FormControl, Select, 
 import { Form, useLoaderData } from 'react-router-dom';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import { useNavigate } from 'react-router-dom';
+import theme from '../theme';
 
 
 
@@ -10,8 +11,8 @@ export const MainPage = () => {
     const navigate = useNavigate()
     console.log(data)
     return (
-        <Container maxWidth={false}>
-            <Container maxWidth={'xl'} sx={{ marginTop: '2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'end' }}>
+        <Container  sx={{backgroundColor: 'background.default'}}>
+            <Container  sx={{mt: '2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'end' }}>
                 <Form>
                 <TextField
                     variant='standard'
@@ -20,9 +21,10 @@ export const MainPage = () => {
                             fontSize: '14px',
                             fontWeight: '600',
                             width: '25rem',
-                            boxShadow: '0 0 10px 1px hsl(209deg 23% 22% / 14%)',
+                            boxShadow: `0 0 10px 1px ${theme.palette.secondary.main}`,
                             padding: '.5rem 1.5rem',
-                            borderRadius: '5px'
+                            borderRadius: '5px',
+                            backgroundColor: 'background.paper'
                         },
                         type: 'Search',
                         name: 'q',
@@ -49,11 +51,12 @@ export const MainPage = () => {
                             variant='standard'
                             defaultValue=''
                             sx={{
-                                boxShadow: '0 0 10px 1px hsl(209deg 23% 22% / 14%)',
+                                boxShadow: `0 0 10px 1px ${theme.palette.secondary.main}`,
                                 '.MuiOutlinedInput-notchedOutline': { border: 0 },
                                 backgroundColor: 'none',
                                 height: '3rem',
-                                borderRadius: '5px'
+                                borderRadius: '5px',
+                                backgroundColor: 'background.paper'
                             }}
                             labelId="select-label"
                             disableUnderline={true}
@@ -76,10 +79,10 @@ export const MainPage = () => {
                 {data.map(item => (
                 <Grid item xs={12} sm={4} md={4} lg={3} xl={3} display='flex' alignItems='center' justifyContent='center' pt={0}  >
                 <Card 
-                        sx={{ maxWidth: 280, boxShadow: '0 0 10px 1px hsl(209deg 23% 22% / 14%)', minWidth: '250px', }} 
+                        sx={{ maxWidth: 280, boxShadow: `0 0 10px 1px ${theme.palette.secondary.main}`, minWidth: '250px', }} 
                         >
                     <CardMedia
-                        sx={{cursor: 'pointer'}}
+                        sx={{cursor: 'pointer', boxShadow: `0 0 5px .5px ${theme.palette.secondary.main}`}}
                         onClick={() => navigate(`/${item.name.common}`)}
                         height={200}
                         component="img"

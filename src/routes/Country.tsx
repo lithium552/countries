@@ -4,6 +4,7 @@ import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
 import Card from "@mui/material/Card";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
+import theme from "../theme";
 
 
 const Country = () => {
@@ -20,13 +21,23 @@ const Country = () => {
     },[data[0]])
     console.log(data[0], borderCountries)
     const navigate = useNavigate()
+
   return (
     <Container maxWidth={'xl'}>
     <Container maxWidth={'xl'} sx={{ marginTop: '2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'end' }}>
-    <Button onClick={() => navigate(-1)} variant="contained" sx={{backgroundColor: 'background.default', color: 'primary.main',
-     '&:hover': {backgroundColor: '#fff'}, boxShadow: '0 0 10px 1px hsl(209deg 23% 22% / 24%)'}}><ArrowBackRoundedIcon sx={{marginRight: '.5rem', fontSize: '1rem'}}/>Back</Button>
+    <Button onClick={() => navigate(-1)} 
+            variant="contained" 
+            sx={{
+                backgroundColor: 'background.paper',
+                 color: 'primary.main',
+                boxShadow: `0 0 10px 1px ${theme.palette.secondary.main}`,
+                textTransform: 'capitalize',
+                '&:hover': {backgroundColor: 'action.hover'}
+            }}
+                
+                ><ArrowBackRoundedIcon sx={{marginRight: '.5rem', fontSize: '1rem'}}/>Back</Button>
     </Container>
-    <Card sx={{display: 'flex', alignItems: 'center', gap: '4rem', mt: '2rem', backgroundColor: '#fff', boxShadow: 'none'}}>
+    <Card sx={{display: 'flex', alignItems: 'center', gap: '4rem', mt: '2rem', backgroundColor: 'background.default', backgroundImage: 'none', boxShadow: 'none'}}>
         <CardMedia
             sx={{width: '50%', p: '1rem', flex: '1'}}
             component="img"
@@ -98,11 +109,11 @@ const Country = () => {
         {borderCountries.map(country => (
             <Button 
                 variant="contained" 
-                sx={{backgroundColor: 'background.default',
+                sx={{backgroundColor: 'background.paper',
                     textTransform: 'capitalize',
                     color: 'primary.main',
-                    '&:hover': {backgroundColor: '#fff'},
-                    boxShadow: '0 0 10px 1px hsl(209deg 23% 22% / 15%)'}}
+                    '&:hover': {backgroundColor: 'action.hover'},
+                    boxShadow: `0 0 10px 1px ${theme.palette.secondary.main}`}}
                     onClick={() => {
                         navigate(`/${country}`)
                     }}>{country}</Button>
