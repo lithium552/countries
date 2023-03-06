@@ -2,17 +2,19 @@ import { Container, InputAdornment, TextField, InputLabel, FormControl, Select, 
 import { Form, useLoaderData } from 'react-router-dom';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import { useNavigate } from 'react-router-dom';
-import theme from '../theme';
+import { useTheme } from '@mui/material/styles';
 
 
 
 export const MainPage = () => {
+    const theme = useTheme()
     const data = useLoaderData()
     const navigate = useNavigate()
-    console.log(data)
     return (
-        <Container  sx={{backgroundColor: 'background.default'}}>
-            <Container  sx={{mt: '2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'end' }}>
+        <Container maxWidth='xl'  sx={{backgroundColor: 'background.default'}}>
+            <Container maxWidth='lg'>
+            <Grid container alignItems='end' mt='2rem'>
+                <Grid item xs={12} md={'auto'}>           
                 <Form>
                 <TextField
                     variant='standard'
@@ -20,7 +22,7 @@ export const MainPage = () => {
                         sx: {
                             fontSize: '14px',
                             fontWeight: '600',
-                            width: '25rem',
+                            width: '20rem',
                             boxShadow: `0 0 10px 1px ${theme.palette.secondary.main}`,
                             padding: '.5rem 1.5rem',
                             borderRadius: '5px',
@@ -43,7 +45,9 @@ export const MainPage = () => {
                     }}
                 />
                 </Form>
-                <Box sx={{ width: 300 }}>
+                </Grid>  
+                <Grid item xs={12} md={3} ml='auto'>
+                <Box sx={{ width: 300, ml: 'auto' }}>
                     <FormControl fullWidth>
                         <InputLabel id="select-label" sx={{ fontSize: 17, left: '40px', top: '12px' }}>Filter by region</InputLabel>
                         <Select
@@ -53,7 +57,6 @@ export const MainPage = () => {
                             sx={{
                                 boxShadow: `0 0 10px 1px ${theme.palette.secondary.main}`,
                                 '.MuiOutlinedInput-notchedOutline': { border: 0 },
-                                backgroundColor: 'none',
                                 height: '3rem',
                                 borderRadius: '5px',
                                 backgroundColor: 'background.paper'
@@ -74,10 +77,11 @@ export const MainPage = () => {
                         </Select>
                     </FormControl>
                 </Box>
-            </Container>
+                </Grid>
+                </Grid>
             <Grid container rowSpacing={8} justifyContent='space-between'  sx={{mt: '2rem', ml: 0}} >
                 {data.map(item => (
-                <Grid item xs={12} sm={4} md={4} lg={3} xl={3} display='flex' alignItems='center' justifyContent='center' pt={0}  >
+                <Grid item xs={12} sm={6} md={6} lg={3} xl={3} display='flex' alignItems='center' justifyContent='center' pt={0}  >
                 <Card 
                         sx={{ maxWidth: 280, boxShadow: `0 0 10px 1px ${theme.palette.secondary.main}`, minWidth: '250px', }} 
                         >
@@ -87,7 +91,7 @@ export const MainPage = () => {
                         height={200}
                         component="img"
                         image={item.flags.svg}
-                        alt="Paella dish"
+                        alt="flag ing"
                     />
                     <CardContent sx={{  pl: '1.5rem'}}>
                         <Typography variant="subtitle1" mb={1} lineHeight={1.1} fontWeight='fontWeightBold' color="text.primary" >
@@ -107,6 +111,7 @@ export const MainPage = () => {
                 </Grid>
                 ))}
             </Grid>
+            </Container>
         </Container>
     )
 }

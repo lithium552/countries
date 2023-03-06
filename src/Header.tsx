@@ -1,34 +1,37 @@
 import { Typography, Stack, Box, Container } from '@mui/material';
 import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
-import theme from './theme';
 import { Link } from 'react-router-dom';
+import useTheme from '@mui/material/styles/useTheme';
+
 
 const Header = ({colorMode}) => {
+    const theme = useTheme()
+    console.log(theme)
     return (
-        <header>
-            {/* <Container
-                maxWidth={'xl'}
-                disableGutters={true}
-                sx={{
-                    boxShadow: `0 0 10px 1px ${theme.palette.secondary.main}`,
-                    backgroundColor: 'background.paper'
-                }}
-            > */}
                 <Container
-                    // maxWidth={'md'}
+                    maxWidth='xl'
                     sx={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'space-between',
-                        height: '5rem'
+                        boxShadow: `0 0 10px 1px ${theme.palette.secondary.main}`,
+                        backgroundColor: 'background.paper',
+                        mr: '0',
+                        ml: '0'
                     }}
                 >
+                    <Container 
+                        maxWidth='lg'
+                        sx={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'space-between',
+                            height: '5rem',
+                        }}
+                        >
                     <Link to='/' style={{ textDecoration: 'none' }}>
                         <Typography
                             variant='subtitle1'
                             sx={{
                                 color: 'primary.main',
-                                fontWeight: theme.typography.fontWeightBold
+                                fontWeight: 'fontWeightBold'
                             }}>
                             Where in the world?
                         </Typography>
@@ -44,13 +47,12 @@ const Header = ({colorMode}) => {
                             variant='caption'
                             sx={{
                                 color: 'primary.text',
-                                fontWeight: theme.typography.fontWeightMedium,
+                                fontWeight: 'fontWeightMedium',
                                 cursor: 'pointer'
                             }}>Dark Mode</Typography>
                     </Stack>
+                    </Container>
                 </Container>
-            {/* </Container> */}
-        </header>
     )
 }
 

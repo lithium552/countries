@@ -13,7 +13,7 @@ const restThemeParameters = {
             sm: 600,
             md: 900,
             lg: 1440,
-            xl: 1536,
+            xl: '100%',
         }
     },
     typography: {
@@ -63,6 +63,10 @@ const getDesignTokens = (mode) => ({
                 default: 'hsl(207, 26%, 17%)',
                 paper: 'hsl(209, 23%, 22%)',
             },
+            secondary: {
+              main : 'hsl(209deg 16% 9% / 24%)'
+            }
+            ,
             text: {
               primary: 'hsl(0, 0%, 100%)',
             },
