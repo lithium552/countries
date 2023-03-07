@@ -3,18 +3,30 @@ import { Form, useLoaderData } from 'react-router-dom';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import { useNavigate } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
+import {useMediaQuery} from '@mui/material'
+import { Data } from '../types';
+
 
 
 
 export const MainPage = () => {
     const theme = useTheme()
-    const data = useLoaderData()
+    const data = useLoaderData() as Data[]
+    // data.length = 124
     const navigate = useNavigate()
+    const matchesMd = useMediaQuery(theme.breakpoints.down('md'))
+    const matchesSm = useMediaQuery(theme.breakpoints.down('sm'))
+    console.log(data)
     return (
         <Container maxWidth='xl'  sx={{backgroundColor: 'background.default'}}>
-            <Container maxWidth='lg'>
-            <Grid container alignItems='end' mt='2rem'>
-                <Grid item xs={12} md={'auto'}>           
+            <Container maxWidth='lg' sx={{mt:'2rem'}}>
+                <Container 
+                    sx={
+                        {display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: matchesSm ? 'start' : 'end',
+                        flexWrap: 'wrap'    
+                        }}>
                 <Form>
                 <TextField
                     variant='standard'
@@ -22,7 +34,7 @@ export const MainPage = () => {
                         sx: {
                             fontSize: '14px',
                             fontWeight: '600',
-                            width: '20rem',
+                            width: matchesMd ? 'auto' : '20rem',
                             boxShadow: `0 0 10px 1px ${theme.palette.secondary.main}`,
                             padding: '.5rem 1.5rem',
                             borderRadius: '5px',
@@ -45,9 +57,7 @@ export const MainPage = () => {
                     }}
                 />
                 </Form>
-                </Grid>  
-                <Grid item xs={12} md={3} ml='auto'>
-                <Box sx={{ width: 300, ml: 'auto' }}>
+                <Box sx={{ width: 300, }}>
                     <FormControl fullWidth>
                         <InputLabel id="select-label" sx={{ fontSize: 17, left: '40px', top: '12px' }}>Filter by region</InputLabel>
                         <Select
@@ -77,11 +87,10 @@ export const MainPage = () => {
                         </Select>
                     </FormControl>
                 </Box>
-                </Grid>
-                </Grid>
+                </Container>
             <Grid container rowSpacing={8} justifyContent='space-between'  sx={{mt: '2rem', ml: 0}} >
-                {data.map(item => (
-                <Grid item xs={12} sm={6} md={6} lg={3} xl={3} display='flex' alignItems='center' justifyContent='center' pt={0}  >
+                {data.map((item: Data) => (
+                <Grid item xs={12} sm={6} md={4} lg={3} xl={3} display='flex' alignItems='center' justifyContent='center' pt={0}  >
                 <Card 
                         sx={{ maxWidth: 280, boxShadow: `0 0 10px 1px ${theme.palette.secondary.main}`, minWidth: '250px', }} 
                         >
