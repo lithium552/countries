@@ -5,46 +5,22 @@ import { useNavigate } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
 import { useMediaQuery } from '@mui/material'
 import { Data } from '../types';
-import { useState, useRef } from 'react';
-import CircularProgress from '@mui/material/CircularProgress';
+import { useState } from 'react';
 
 
 
 
 export const MainPage = () => {
     const data = useLoaderData() as Data[]
-    const [index, setIndex] = useState(12)
-    const [isLoading, setIsLoading] = useState(false)
+    const [index, setIndex] = useState(1)
+    const [renderData, setRenderData] = useState(data.slice(0, index))
     const theme = useTheme()
     const navigate = useNavigate()
     const matchesMd = useMediaQuery(theme.breakpoints.down('md'))
     const matchesSm = useMediaQuery(theme.breakpoints.down('sm'))
-    const ref = useRef(true)
-
-    const scrollEventListener = (e) => {
-        if (ref.current) {
-            ref.current = false
-        setTimeout(() => {
-            console.log(e.target.scrollingElement.scrollHeight)
-            console.log(window.innerHeight + e.target.scrollingElement.scrollTop)
-            if (window.innerHeight + e.target.scrollingElement.scrollTop > e.target.scrollingElement.scrollHeight - 100) {
-                setIsLoading(true)
-                setTimeout(() => {
-                    setIsLoading(false)
-                    setIndex(prev => prev + 12)
-                }, 1500)
-            }
-        }, 200)
-        setTimeout(() => {
-            ref.current = true
-        }, 200)
-    }
-    }
-
-        document.addEventListener('scroll', scrollEventListener)
     console.log(data)
     return (
-        <Container maxWidth='xl'  sx={{backgroundColor: 'background.default'}} >
+        <Container maxWidth='xl'  sx={{backgroundColor: 'background.default'}}>
             <Container maxWidth='lg' sx={{mt:'2rem'}}>
                 <Container 
                     sx={
@@ -84,12 +60,17 @@ export const MainPage = () => {
                 />
                 </Form>
                 <Box sx={{ width: 300, }}>
+                    <Button onClick={() => {
+                        setRenderData(prev => [...prev ,...data.slice(index, index + 1)])
+                        setIndex(prev => prev + 1)
+                        }}>Add</Button>
                     <FormControl fullWidth>
                         <InputLabel id="select-label" sx={{ fontSize: 17, left: '40px', top: '12px' }}>Filter by region</InputLabel>
                         <Select
                             onChange={(e) => {
+                                setIndex(1)
+                                setRenderData(data.slice(0, index))
                                 navigate(`/regions/${e.target.value}`)
-                                setIndex(12)
                             }}
                             variant='standard'
                             defaultValue=''
@@ -118,7 +99,7 @@ export const MainPage = () => {
                 </Box>
                 </Container>
             <Grid container rowSpacing={8} justifyContent='space-between'  sx={{mt: '2rem', ml: 0}} >
-                {[...data.slice(0, index)].map((item: Data) => (
+                {renderData.map((item: Data) => (
                 <Grid item xs={12} sm={6} md={4} lg={3} xl={3} display='flex' alignItems='center' justifyContent='center' pt={0} key={item.cca2} >
                 <Card 
                         sx={{ maxWidth: 280, boxShadow: `0 0 10px 1px ${theme.palette.secondary.main}`, minWidth: '250px', }} 
@@ -155,11 +136,6 @@ export const MainPage = () => {
                 </Card>
                 </Grid>
                 ))}
-                {isLoading && (
-                    <Box sx={{ display: 'flex', justifyContent: 'center', width: '100%', mt: '2rem', mb: '3rem' }}>
-                    <CircularProgress />
-                    </Box>
-                )}
             </Grid>
             </Container>
         </Container>

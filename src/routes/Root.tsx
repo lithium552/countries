@@ -13,7 +13,7 @@ const restThemeParameters = {
             sm: 600,
             md: 900,
             lg: 1440,
-            xl: '100%',
+            xl: 1920,
         }
     },
     typography: {
@@ -30,7 +30,7 @@ const restThemeParameters = {
     },
 }
 
-const getDesignTokens = (mode) => ({
+const getDesignTokens = (mode: string) => ({
     palette: {
       mode,
       ...(mode === 'light'

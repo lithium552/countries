@@ -6,14 +6,16 @@ import { useLoaderData, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useTheme } from "@mui/material/styles";
 import {useMediaQuery} from '@mui/material'
+import { Data } from "../types";
 
 
 const Country = () => {
     const [borderCountries, setBorderCountries] = useState([])
-    const data = useLoaderData()
+    const data = useLoaderData() as Data[]
     const theme = useTheme()
     const matchesMd = useMediaQuery(theme.breakpoints.down('md'))
     const matchesSm = useMediaQuery(theme.breakpoints.down('sm'))
+
     useEffect(() => {
         if (data[0]?.borders?.length) {
         fetch(`https://restcountries.com/v3.1/alpha?codes=${data[0].borders.join()}`)
@@ -115,6 +117,7 @@ const Country = () => {
         <Typography fontWeight='fontWeightBold'>Border Countries:</Typography>
         {borderCountries.map(country => (
             <Button 
+                key={country}
                 variant="contained" 
                 sx={{backgroundColor: 'background.paper',
                     textTransform: 'capitalize',
