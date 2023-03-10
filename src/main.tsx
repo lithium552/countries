@@ -7,6 +7,7 @@ import {
 import { Root } from './routes/Root';
 import { MainPage } from './routes/MainPage';
 import Country from './routes/Country';
+import { MainPageWithPagination } from './routes/MainPageWithPagination'
 
 const router = createBrowserRouter([
   {
@@ -18,8 +19,8 @@ const router = createBrowserRouter([
         element: <MainPage/>,
         loader: async ({request}) => {
           const url = new URL(request.url);
-          console.log(url)
           const q = url.searchParams.get("q");
+          console.log(q)
           if (q) return fetch(`https://restcountries.com/v3.1/name/${q}`)
           return fetch('https://restcountries.com/v3.1/all')
         },
@@ -37,10 +38,32 @@ const router = createBrowserRouter([
         element: <MainPage/>,
         loader: async ({params, request}) => {
           const url = new URL(request.url);
-          console.log(url)
+          console.log(params)
           const q = url.searchParams.get("q");
           if (q) return fetch(`https://restcountries.com/v3.1/name/${q}`)
           return fetch(`https://restcountries.com/v3.1/region/${params.region}`)
+        }
+      },
+      {
+        path: '/pages/',
+        element: <MainPageWithPagination />,
+        loader: async ({params, request}) => {
+          // if (!params) console.log('HELLO')
+          const response = await fetch('https://restcountries.com/v3.1/all')
+          const res = await response.json()
+          console.log(res, params, request)
+          return fetch('https://restcountries.com/v3.1/all')
+        }
+      },
+      {
+        path: '/pages/:page',
+        element: <MainPageWithPagination />,
+        loader: async ({params, request}) => {
+          // if (!params) console.log('HELLO')
+          const response = await fetch('https://restcountries.com/v3.1/all')
+          const res = await response.json()
+          console.log(res, params, request)
+          return fetch('https://restcountries.com/v3.1/all')
         }
       }
     ]
@@ -48,8 +71,7 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
- 
+  <React.StrictMode> 
     <RouterProvider router={router} />
   </React.StrictMode>,
 )

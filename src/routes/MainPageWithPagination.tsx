@@ -10,7 +10,7 @@ import { useState } from 'react';
 
 
 
-export const MainPage = () => {
+export const MainPageWithPagination = () => {
     const data = useLoaderData() as Data[]
     const [index, setIndex] = useState(1)
     const [renderData, setRenderData] = useState(data.slice(0, index))
@@ -137,6 +137,7 @@ export const MainPage = () => {
                 </Grid>
                 ))}
             </Grid>
+            <Box></Box>
             </Container>
         </Container>
     )
