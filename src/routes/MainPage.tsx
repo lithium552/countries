@@ -100,7 +100,7 @@ export const MainPage = () => {
                             <InputLabel id="select-label" sx={{ fontSize: 17, left: '40px', top: '12px' }}>Filter by region</InputLabel>
                             <Select
                                 onChange={(e) => {
-                                    navigate(`/regions/${e.target.value}`)
+                                    navigate(`/countries/regions/${e.target.value}`)
                                     setIndex(12)
                                 }}
                                 variant='standard'
@@ -135,7 +135,7 @@ export const MainPage = () => {
                             <Card
                                 sx={{ maxWidth: 300, boxShadow: `0 0 10px 1px ${theme.palette.secondary.main}`,  flex: '1', }}
                             >
-                            <Link to={`/${item.name.common}`} >
+                            <Link to={`/countries/${item.name.common}`} >
                                 <CardMedia
                                     sx={{ cursor: 'pointer', boxShadow: `0 0 5px .5px ${theme.palette.secondary.main}` }}
                                     height={200}

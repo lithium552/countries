@@ -25,7 +25,6 @@ const Country = () => {
             })
         }
     },[data[0]])
-    console.log(data[0], borderCountries)
     const navigate = useNavigate()
 
   return (
@@ -125,7 +124,7 @@ const Country = () => {
                     '&:hover': {backgroundColor: 'action.hover'},
                     boxShadow: `0 0 10px 1px  ${theme.palette.secondary.main}`}}
                     onClick={() => {
-                        navigate(`/${country}`)
+                        navigate(`/countries/${country}`)
                     }}>{country}</Button>
         ))}
         </Box>

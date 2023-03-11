@@ -26,30 +26,29 @@ const pagesArr = (res : Data[]) => {
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/countries",
     element: <Root />,
     children: [
       {
-        path: "/",
+        path: "/countries",
         element: <MainPage />,
         loader: async ({ request }) => {
           const url = new URL(request.url);
           const q = url.searchParams.get("q");
-          console.log(request)
-          if (q) return fetch(`https://restcountries.com/v3.1/name/${q}`).catch(err => {throw new Error(err)})
+          if (q) return fetch(`https://restcountries.com/v3.1/name/${q}`)
           return fetch('https://restcountries.com/v3.1/all')
         },
         errorElement: <ErorrElement />
       },
       {
-        path: '/:country',
+        path: '/countries/:country',
         element: <Country />,
         loader: async ({ params }) => {
           return fetch(`https://restcountries.com/v3.1/name/${params.country}`)
         }
       },
       {
-        path: '/regions/:region',
+        path: '/countries/regions/:region',
         element: <MainPage />,
         loader: async ({ params, request }) => {
           const url = new URL(request.url);
@@ -59,7 +58,7 @@ const router = createBrowserRouter([
         }
       },
       {
-        path: '/pages/:region',
+        path: '/countries/pages/:region',
         element: <MainPageWithPagination />,
         loader: async ({ params, request }) => {
           const url = new URL(request.url);
@@ -77,13 +76,13 @@ const router = createBrowserRouter([
         },
       },
         {
-          path: '/pages/all',
+          path: '/countries/pages/all',
           element: <MainPageWithPagination />,
           loader: async ({params, request}) => {
             const url = new URL(request.url);
             const page = url.searchParams.get("page")
             const q = url.searchParams.get("q")
-            if (q) return redirect(`/?q=${q}`)
+            if (q) return redirect(`/countries/?q=${q}`)
             const response = await fetch('https://restcountries.com/v3.1/all')
             const res = await response.json()
             const arr = pagesArr(res)

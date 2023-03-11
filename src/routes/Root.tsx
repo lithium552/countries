@@ -1,4 +1,3 @@
-// import theme from '../theme';
 import Header from '../Header';
 import { Outlet } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';

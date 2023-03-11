@@ -25,7 +25,6 @@ export const MainPageWithPagination = () => {
     const navigate = useNavigate()
     const matchesMd = useMediaQuery(theme.breakpoints.down('md'))
     const matchesSm = useMediaQuery(theme.breakpoints.down('sm'))
-    console.log(data)
     return (
         <Container maxWidth='xl' sx={{ backgroundColor: 'background.default' }}>
             <Container maxWidth='lg' sx={{ mt: '2rem' }}>
@@ -72,7 +71,7 @@ export const MainPageWithPagination = () => {
                             <InputLabel id="select-label" sx={{ fontSize: 17, left: '40px', top: '12px' }}>Filter by region</InputLabel>
                             <Select
                                 onChange={(e) => {
-                                    navigate(`/pages/${e.target.value}`)
+                                    navigate(`/countries/pages/${e.target.value}`)
                                 }}
                                 variant='standard'
                                 defaultValue=''
@@ -105,7 +104,7 @@ export const MainPageWithPagination = () => {
                         <Grid item xs={12} sm={6} md={4} lg={3} xl={3} display='flex' alignItems='center' justifyContent='center' pt={0} key={item.cca2} >
                             <Card
                                 sx={{ maxWidth: 300, boxShadow: `0 0 10px 1px ${theme.palette.secondary.main}`, minWidth: '300px', }}
-                            >   <Link to={`/${item.name.common}`} >
+                            >   <Link to={`/countries/${item.name.common}`} >
                                 <CardMedia
                                     sx={{ cursor: 'pointer', boxShadow: `0 0 5px .5px ${theme.palette.secondary.main}` }}
                                     height={200}

@@ -29,7 +29,7 @@ const Header = ({ colorMode }: {colorMode:{toggleColorMode: () => void}}) => {
                     }}
                 >
                     <Box sx={{ display: 'flex', gap: matchesSm ? '' : '1rem', flexDirection: matchesSm ? 'column' : 'row' }}>
-                        <Link to='/' style={{ textDecoration: 'none' }}>
+                        <Link to='/countries/' style={{ textDecoration: 'none' }}>
                             <Typography
                                 variant='subtitle1'
                                 sx={{
@@ -39,7 +39,7 @@ const Header = ({ colorMode }: {colorMode:{toggleColorMode: () => void}}) => {
                                 Where in the world?
                             </Typography>
                         </Link>
-                        <Link to='/pages/all' style={{ textDecoration: 'none' }}>
+                        <Link to='/countries/pages/all' style={{ textDecoration: 'none' }}>
                             <Typography
                                 variant='subtitle1'
                                 sx={{
