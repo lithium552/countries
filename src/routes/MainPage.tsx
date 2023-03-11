@@ -8,11 +8,15 @@ import { Data } from '../types';
 import { useState, useRef, useEffect } from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
 
-
+interface ErrorData {
+    status: number
+    message: string
+    length: number
+}
 
 
 export const MainPage = () => {
-    const data = useLoaderData() as Data[]
+    const data = useLoaderData() as Data[] | ErrorData
     const [index, setIndex] = useState(12)
     const [isLoading, setIsLoading] = useState(false)
     const theme = useTheme()
@@ -28,7 +32,7 @@ export const MainPage = () => {
             }
         } 
     }
-    const slicedData = Array.isArray(data) ? [...data.slice(0, index)] : data
+    const slicedData = (Array.isArray(data) ? [...data.slice(0, index)] : data) as Data[]
 
     useEffect(() => {
         if (isLoading) {

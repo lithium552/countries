@@ -25,12 +25,10 @@ const restThemeParameters = {
         fontWeightMedium: '600',
         fontWeightBold: '800',
         fontWeightRegular: '300',
-        // fontSize: 16,
-        // htmlFontSize: 14
     },
 }
 
-const getDesignTokens = (mode: string) => ({
+const getDesignTokens = (mode: any) => ({
     palette: {
       mode,
       ...(mode === 'light'
