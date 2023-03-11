@@ -48,13 +48,13 @@ const Country = () => {
             ? {display: 'flex', alignItems: 'center', mt: '2rem', backgroundColor: 'background.default', backgroundImage: 'none', boxShadow: 'none'}
             : {width: '100%', backgroundColor: 'background.default', mt: '2rem', boxShadow: 'none'}}>
         <CardMedia
-            sx={{width: !matchesMd ? '40%': '100%', p: '1rem', flex: '1'}}
+            sx={{width: !matchesMd ? '40%': '100%', p: '1rem', flex: '1', }}
             component="img"
             // height="500"
             image={data[0].flags.svg}
             alt="green iguana"
         />
-        <Box sx={{flex: '1.5'}}>
+        <Box sx={{flex: '1'}}>
         <CardContent>
             <Typography variant="h4" fontWeight='fontWeightBold' color="text.primary">
                 {data[0].name.official}

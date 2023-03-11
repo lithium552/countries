@@ -1,5 +1,5 @@
 import { Container, InputAdornment, TextField, InputLabel, FormControl, Select, MenuItem, Box, Card, CardMedia, CardContent, Typography, Grid, Button } from '@mui/material'
-import { Form, useLoaderData } from 'react-router-dom';
+import { Form, Link, useLoaderData } from 'react-router-dom';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import { useNavigate } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
@@ -21,15 +21,14 @@ export const MainPage = () => {
     const matchesSm = useMediaQuery(theme.breakpoints.down('sm'))
     const ref = useRef(true)
 
-    const scrollEventListener = (e) => {
+    const scrollEventListener = (e: any) => {
         if (ref.current) {
             if (window.innerHeight + e.target.scrollingElement.scrollTop > e.target.scrollingElement.scrollHeight - 100) {
                 setIsLoading(true)
             }
         } 
     }
-
-    const slicedData = [...data.slice(0, index)]
+    const slicedData = Array.isArray(data) ? [...data.slice(0, index)] : data
 
     useEffect(() => {
         if (isLoading) {
@@ -126,20 +125,21 @@ export const MainPage = () => {
                         </FormControl>
                     </Box>
                 </Container>
-                <Grid container rowSpacing={8} justifyContent='space-between' sx={{ mt: '2rem', ml: 0 }} >
-                    {slicedData.map((item: Data) => (
+                <Grid container rowSpacing={8}  justifyContent='space-between' sx={{ mt: '2rem', ml: 0 }} >
+                    {Array.isArray(data) && slicedData.map((item: Data) => (
                         <Grid item xs={12} sm={6} md={4} lg={3} xl={3} display='flex' alignItems='center' justifyContent='center' pt={0} key={item.cca2} >
                             <Card
-                                sx={{ maxWidth: 300, boxShadow: `0 0 10px 1px ${theme.palette.secondary.main}`, minWidth: '300px', }}
+                                sx={{ maxWidth: 300, boxShadow: `0 0 10px 1px ${theme.palette.secondary.main}`,  flex: '1', }}
                             >
+                            <Link to={`/${item.name.common}`} >
                                 <CardMedia
                                     sx={{ cursor: 'pointer', boxShadow: `0 0 5px .5px ${theme.palette.secondary.main}` }}
-                                    onClick={() => navigate(`/${item.name.common}`)}
                                     height={200}
                                     component="img"
                                     image={item.flags.svg}
                                     alt="flag ing"
                                 />
+                            </Link>
                                 <CardContent sx={{ pl: '1.5rem' }}>
                                     <Typography variant="subtitle1" mb={1} lineHeight={1.1} fontWeight='fontWeightBold' color="text.primary" >
                                         {item.name.common}
@@ -164,6 +164,11 @@ export const MainPage = () => {
                             </Card>
                         </Grid>
                     ))}
+                    {!Array.isArray(data) && typeof data === 'object' && (
+                        <Box m={'auto'}>
+                            <Typography variant='h3'>{data.message}</Typography>
+                        </Box>
+                    )}
                     {isLoading && (
                         <Box sx={{ display: 'flex', justifyContent: 'center', width: '100%', mt: '2rem', mb: '3rem' }}>
                             <CircularProgress />
