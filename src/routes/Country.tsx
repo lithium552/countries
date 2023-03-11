@@ -21,7 +21,7 @@ const Country = () => {
         fetch(`https://restcountries.com/v3.1/alpha?codes=${data[0].borders.join()}`)
             .then(res => res.json())
             .then(data => {
-                setBorderCountries(data.map(country => country.name.common))
+                setBorderCountries(data.map((country: Data) => country.name.common))
             })
         }
     },[data[0]])

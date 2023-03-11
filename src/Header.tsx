@@ -5,7 +5,7 @@ import useTheme from '@mui/material/styles/useTheme';
 import { useMediaQuery } from '@mui/material'
 
 
-const Header = ({ colorMode }) => {
+const Header = ({ colorMode }: {colorMode:{toggleColorMode: () => void}}) => {
     const theme = useTheme()
     const matchesSm = useMediaQuery(theme.breakpoints.down('sm'))
     return (
