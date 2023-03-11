@@ -64,7 +64,7 @@ const router = createBrowserRouter([
           const url = new URL(request.url);
           const page = url.searchParams.get("page")
           const q = url.searchParams.get("q")
-          if (q) return redirect(`/?q=${q}`)
+          if (q) return redirect(`/countries/?q=${q}`)
           const { region } = params
           if (region) {
             const response = await fetch(`https://restcountries.com/v3.1/region/${region}`)
